@@ -1,0 +1,19 @@
+Nombre sugerido: Elysium3D Publisher
+
+Empresa: Elysium3D
+
+Objetivo de la aplicación:
+Elysium3D Publisher permite al propietario de un catálogo de modelos 3D organizar y publicar contenido visual en su propia cuenta de Pinterest. La aplicación importa metadatos e imágenes o videos públicos de sus publicaciones de Cults3D, propone tableros por categoría y crea Pins con títulos, descripciones, etiquetas y enlaces directos hacia las páginas originales de Cults3D. La aplicación no descarga, aloja ni redistribuye archivos STL, 3MF u otros archivos 3D.
+
+Permisos solicitados:
+boards:read, boards:write, pins:read, pins:write, user_accounts:read.
+
+Flujo de uso:
+1. El propietario conecta su cuenta de Pinterest mediante OAuth.
+2. La aplicación lee sus tableros existentes y crea nuevos tableros solo si el propietario lo autoriza.
+3. Se preparan Pins con contenido visual y enlaces a Cults3D.
+4. El propietario revisa y confirma la publicación.
+
+URLs a completar después de publicar:
+Main URL: https://TU_USUARIO.github.io/TU_REPOSITORIO/landing.html
+Privacy Policy: https://TU_USUARIO.github.io/TU_REPOSITORIO/privacy.html
