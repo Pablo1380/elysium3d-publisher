@@ -1,8 +1,1 @@
-const USERNAME = 'Elysium3d';
-export async function onRequestGet({ env }) {
-  if (!env.CULTS_API_KEY) return Response.json({ error: 'cults_not_configured' }, { status: 503 });
-  const query = `query { creations(limit: 100) { name url description tags creator { nick } illustrations { url } } }`;
-  const auth = btoa(`${USERNAME}:${env.CULTS_API_KEY}`);
-  const response = await fetch('https://cults3d.com/graphql', { method:'POST', headers:{Authorization:`Basic ${auth}`,'Content-Type':'application/json'}, body:JSON.stringify({query}) });
-  return new Response(await response.text(), { status:response.status, headers:{'Content-Type':'application/json'} });
-}
+export async function onRequestGet({env}){if(!env.CULTS_API_KEY)return Response.json({error:'cults_not_configured'},{status:503});const username=env.CULTS_USERNAME||'Elysium3d';const query='query MyCreations { myself { creationsBatch(limit: 100, offset: 0) { results { id name url description tags illustrationImageUrl illustrations { id imageUrl position } } } } }';const auth=btoa(username+':'+env.CULTS_API_KEY);const response=await fetch('https://cults3d.com/graphql',{method:'POST',headers:{Authorization:'Basic '+auth,'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query})});const text=await response.text();if(!response.ok)return Response.json({error:'cults_http_error',status:response.status,detail:text},{status:response.status});try{return Response.json(JSON.parse(text))}catch{return Response.json({error:'cults_invalid_response',detail:text},{status:502})}}
