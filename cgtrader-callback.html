@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Conectando CGTrader · Studio 3D Publisher</title>
+  <style>
+    body{font:16px/1.5 system-ui,sans-serif;background:#f5f6f8;color:#202431;margin:0;min-height:100vh;display:grid;place-items:center}
+    main{max-width:520px;margin:24px;padding:32px;border:1px solid #e2e5eb;border-radius:16px;background:#fff;box-shadow:0 12px 36px #17203312}
+    h1{font-size:1.35rem;margin:0 0 10px}p{color:#5b6577;margin:0}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Conectando CGTrader con Studio 3D Publisher</h1>
+    <p id="status">Volviendo a la aplicación local…</p>
+  </main>
+  <script>
+    (() => {
+      const received = new URLSearchParams(window.location.search);
+      const target = new URL('http://localhost:8787/auth/cgtrader/callback');
+      for (const key of ['code', 'state', 'error', 'error_description']) {
+        const value = received.get(key);
+        if (value) target.searchParams.set(key, value);
+      }
+      window.history.replaceState({}, '', window.location.pathname);
+      if (!received.has('code') && !received.has('error')) {
+        document.querySelector('#status').textContent = 'No llegó una respuesta válida de CGTrader. Volvé a la app e intentá conectar otra vez.';
+        return;
+      }
+      window.location.replace(target.href);
+    })();
+  </script>
+</body>
+</html>
